@@ -37,19 +37,22 @@ export class inMemoryDb implements InMemoryDbService {
                 number: 'АХ1111АХ',
                 name: 'BMW',
                 model: 'M8 Competition',
-                year: 2021 
+                year: 2021,
+                id: 'competition'
             },
             {
                 number: 'АХ2222АХ',
                 name: 'Range-Rover',
                 model: 'Vogue',
-                year: 2008 
+                year: 2008 ,
+                id: 'vogue'
             },
             {
                 number: 'АХ3333АХ',
                 name: 'Porsche',
                 model: 'Cayman',
-                year: 2010
+                year: 2010,
+                id: 'cayman'
             } 
         ]  
     },
@@ -63,7 +66,8 @@ export class inMemoryDb implements InMemoryDbService {
                 number: 'АХ0000АХ',
                 name: 'Bentley',
                 model: 'Bentayga',
-                year: 2019 
+                year: 2019,
+                id: 'bentayga'
             }  
         ] 
     },
@@ -77,13 +81,15 @@ export class inMemoryDb implements InMemoryDbService {
                 number: 'АХ6666АХ',
                 name: 'Pagani',
                 model: 'Zonda',
-                year: 2020 
+                year: 2020,
+                id: 'zonda'
             },
             {
                 number: 'АХ8888АХ',
                 name: 'Ferrari',
                 model: 'Berlinetta',
-                year: 2015 
+                year: 2015,
+                id: 'berlinetta'
             } 
         ] 
     },

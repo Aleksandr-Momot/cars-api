@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OwnerService } from 'src/owner.service';
 import { numberValidator } from '../car-number.validators';
-import { Owner } from '../owner';
+import { IOwner } from '../owner';
 
 @Component({
   selector: 'app-create',
@@ -13,12 +13,15 @@ import { Owner } from '../owner';
 })
 export class CreateComponent implements OnInit {
 
-  owner: Owner;
+  owner: IOwner;
   form: FormGroup;
-  submitted = false
+  submitted = false;
 
-  uSub: Subscription
-  constructor(private route: ActivatedRoute, private ownerService:OwnerService, private router: Router) { }
+  uSub: Subscription;
+  constructor(
+    private ownerService:OwnerService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -29,20 +32,19 @@ export class CreateComponent implements OnInit {
       carName: new FormControl('', Validators.required),
       carModel: new FormControl('', Validators.required),
       carYear: new FormControl('', Validators.required),
-    }) 
+    });
   }
 
 
   save(): void {
     this.ownerService.addOwner(this.owner).subscribe(() => {
       this.form.reset()
-    })
-    
+    });
     if(this.form.invalid) {
-      return
+      return;
     }
 
-    const owner: Owner = {
+    const owner: IOwner = {
       ...this.owner,
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
@@ -53,15 +55,15 @@ export class CreateComponent implements OnInit {
           name:  this.form.value.carName,
           model:  this.form.value.carModel,
           year:  this.form.value.carYear,
+          id: this.form.value.id
         }
       ]
-    }
+    };
 
     this.ownerService.addOwner(owner).subscribe(() => {
       this.form.reset()
       this.router.navigate([''])
-    })
-
+    });
   }
 
 }

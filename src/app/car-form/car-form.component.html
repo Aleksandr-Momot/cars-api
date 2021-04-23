@@ -1,40 +1,33 @@
-<form [formGroup]="form">
-        <mat-form-field appearance="outline" class="custom-input">
-            <mat-label for="car-number">Номер автомобиля</mat-label>
-            <input matInput formControlName="carNumber" id="car-number" placeholder="Owner name"
-                autocomplete="carNumber">
-
-            <mat-error class="error" id="requiredEmailError"
-                *ngIf="form.controls['carNumber'].hasError('required')">
-                Введите номер автомобиля
-            </mat-error>
-            <mat-error class="error" id="requiredEmailError"
-                *ngIf="form.controls['carNumber'].hasError('account')">
-                Введите корректный номер автомобиля
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="custom-input">
-            <mat-label for="car-name">Название автомобиля</mat-label>
-            <input matInput formControlName="carName" id="car-name" placeholder="Owner name" autocomplete="carName">
-            <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carName'].hasError('required')">
-                Введите название автомобиля
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="custom-input">
-            <mat-label for="car-model">Модель автомобиля</mat-label>
-            <input matInput formControlName="carModel" id="car-model" placeholder="Owner name"
-                autocomplete="carModel">
-            <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carModel'].hasError('required')">
-                Введите модель автомобиля
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="custom-input">
-            <mat-label for="car-year">Год выпуска</mat-label>
-            <input matInput formControlName="carYear" id="car-year" placeholder="Owner name" autocomplete="carYear">
-            <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carYear'].hasError('required')">
-                Введите год выпуска автомобиля
-            </mat-error>
-        </mat-form-field> 
-   
-
+<form [formGroup]="form" class="car-form-wrapper">
+    <mat-form-field appearance="outline" class="custom-input">
+        <mat-label for="car-number">Номер автомобиля</mat-label>
+        <input matInput formControlName="carNumber" id="car-number" placeholder="Owner name" autocomplete="carNumber">
+        <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carNumber'].hasError('required')">
+            Введите номер автомобиля
+        </mat-error>
+        <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carNumber'].hasError('account')">
+            Введите корректный номер автомобиля
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="custom-input">
+        <mat-label for="car-name">Название автомобиля</mat-label>
+        <input matInput formControlName="carName" id="car-name" placeholder="Owner name" autocomplete="carName">
+        <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carName'].hasError('required')">
+            Введите название автомобиля
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="custom-input">
+        <mat-label for="car-model">Модель автомобиля</mat-label>
+        <input matInput formControlName="carModel" id="car-model" placeholder="Owner name" autocomplete="carModel">
+        <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carModel'].hasError('required')">
+            Введите модель автомобиля
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="custom-input">
+        <mat-label for="car-year">Год выпуска</mat-label>
+        <input matInput formControlName="carYear" id="car-year" placeholder="Owner name" autocomplete="carYear">
+        <mat-error class="error" id="requiredEmailError" *ngIf="form.controls['carYear'].hasError('required')">
+            Введите год выпуска автомобиля
+        </mat-error>
+    </mat-form-field>
 </form>

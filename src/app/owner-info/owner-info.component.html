@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="owner-info" *ngIf="owner">
+    <div class="owner-info" *ngIf="owner; else loading">
         <h2>{{owner.firstName}}</h2>
         <form [formGroup]="form" (ngSubmit)="save()" >
             <mat-form-field appearance="outline" class="custom-input">
@@ -41,7 +41,11 @@
             <button (click)="reload()" mat-raised-button type="submit" color="primary"
             [disabled]="form.invalid || submitted">Обновить</button>
         </div>
-        
+    </div>
 
+    <div class="loading-bar">
+        <ng-template class="loader" #loading>
+            <mat-spinner></mat-spinner>
+        </ng-template>
     </div>
 </div>

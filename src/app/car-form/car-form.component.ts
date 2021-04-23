@@ -20,7 +20,8 @@ export class CarFormComponent implements OnInit {
       carName: new FormControl(this.car.name, Validators.required),
       carModel: new FormControl(this.car.model, Validators.required),
       carYear: new FormControl(this.car.year, Validators.required),
-    })
+    });
+    // tslint:disable-next-line: deprecation
     this.form.statusChanges.subscribe(
       _ => {
         const t = this.form.value;
@@ -30,10 +31,10 @@ export class CarFormComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges(changes: SimpleChanges): void {
     if (changes) {
       console.log(this.car);
     }
   }
-
 }

@@ -1,11 +1,10 @@
 import { OwnerService } from './../../owner.service';
-import { Owner } from './../owner';
+import { IOwner } from './../owner';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { numberValidator } from '../car-number.validators';
 
 
 @Component({
@@ -15,14 +14,14 @@ import { numberValidator } from '../car-number.validators';
 })
 
 export class OwnerInfoComponent implements OnInit {
-  owner: Owner;
-  ownerClone: Owner;
+  owner: IOwner;
+  ownerClone: IOwner;
   form: FormGroup;
   submitted = false;
   carForm: FormGroup;
 
   isAvalible = false;
-  uSub: Subscription
+  uSub: Subscription;
   constructor(
     private route: ActivatedRoute,
     private ownerService: OwnerService,
@@ -37,20 +36,19 @@ export class OwnerInfoComponent implements OnInit {
   carChanged(event) {
     console.log(event);
     let changedCarValue = event;
-    
     if (this.ownerClone.cars.find(car => car.id === changedCarValue.id)) {
       let carT = this.ownerClone.cars.find(car => car.id === changedCarValue.id);
       carT.model = changedCarValue.carModel;
       carT.name = changedCarValue.carName;
       carT.number = changedCarValue.carNumber;
-      carT.year = changedCarValue.carYear
+      carT.year = changedCarValue.carYear;
     }
   }
 
   getOwnerById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ownerService.getOwnerById(id)
-      .subscribe((owner: Owner) => {
+      .subscribe((owner: IOwner) => {
         this.owner = owner;
         let OStr = JSON.stringify(this.owner);
         this.ownerClone = JSON.parse(OStr);
@@ -58,9 +56,8 @@ export class OwnerInfoComponent implements OnInit {
             firstName: new FormControl(this.owner.firstName, Validators.required),
             lastName: new FormControl(this.owner.lastName, Validators.required),
             middleName: new FormControl(this.owner.middleName, Validators.required),
-        })
-       
-      })
+        });
+      });
   }
 
   goBack(): void {
@@ -76,16 +73,15 @@ export class OwnerInfoComponent implements OnInit {
 
   save(): void {
     if (this.form.invalid) {
-      return
+      return;
     }
     this.submitted = true;
-    
     this.ownerClone.firstName = this.form.value.firstName;
     this.ownerClone.lastName = this.form.value.lastName;
     this.ownerClone.middleName = this.form.value.middleName;
     this.uSub = this.ownerService.updateOwner(this.ownerClone).subscribe(() => {
       this.submitted = false;
-      this.router.navigate([''])
-    })
+      this.router.navigate(['']);
+    });
   }
 }

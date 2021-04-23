@@ -1,5 +1,5 @@
 import { OwnerService } from './../../owner.service';
-import { Owner } from './../owner';
+import { IOwner } from './../owner';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  owners: Owner[] = []
+  owners: IOwner[] = [];
   pSub: Subscription;
   dSub: Subscription;
 
@@ -21,13 +21,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.pSub = this.ownerService.getOwners().subscribe(owners => {
-      this.owners = owners
+      this.owners = owners;
     });
   }
 
   delete(id: number) {
     this.dSub = this.ownerService.deleteOwner(id).subscribe(() => {
-      this.owners = this.owners.filter(owner => owner.id !== id)
+      this.owners = this.owners.filter(owner => owner.id !== id);
     });
   }
 }
