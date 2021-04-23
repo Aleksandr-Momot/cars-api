@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateComponent } from './create/create.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarFormComponent } from './car-form/car-form.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     OwnerInfoComponent,
     CreateComponent,
+    CarFormComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     HttpClientInMemoryWebApiModule.forRoot(inMemoryDb),
@@ -33,8 +36,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule
   ],

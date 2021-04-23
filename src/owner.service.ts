@@ -1,11 +1,11 @@
 import { MessageService } from './app/message.service';
-import { Owner } from './app/owner';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { IOwner } from './app/owner';
 
 
 
@@ -23,31 +23,31 @@ export class OwnerService {
     private messageService: MessageService
   ) { }
   
-  getOwners(): Observable<Owner[]> {
-    return this.http.get<Owner[]>(this.ownersUrl)
+  getOwners(): Observable<IOwner[]> {
+    return this.http.get<IOwner[]>(this.ownersUrl)
       .pipe(
         tap(_ => this.log('fetch owners')),
-        catchError(this.handleError<Owner[]>('getOwners', []))
+        catchError(this.handleError<IOwner[]>('getOwners', []))
       );
   }
 
-  getOwnerById(id: number): Observable<Owner> {
+  getOwnerById(id: number): Observable<IOwner> {
     const url = `${this.ownersUrl}/${id}`;
-    return this.http.get<Owner>(url).pipe(
+    return this.http.get<IOwner>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Owner>(`getOwnerById id=${id}`))
+      catchError(this.handleError<IOwner>(`getOwnerById id=${id}`))
     );
   }
 
-  updateOwner(owner: Owner): Observable<any> {
+  updateOwner(owner: IOwner): Observable<any> {
     return this.http.put(this.ownersUrl, owner, this.httpOptions).pipe(
       tap(_ => this.log(`updated owner id=${owner.id}`)),
       catchError(this.handleError<any>('updateOwner'))
     );
   }
   
-  addOwner(owner: Owner): Observable<Owner> {
-    return this.http.post<Owner>(this.ownersUrl, owner, this.httpOptions)
+  addOwner(owner: IOwner): Observable<IOwner> {
+    return this.http.post<IOwner>(this.ownersUrl, owner, this.httpOptions)
       .pipe(map((response) => {
         return {
           ...owner,
@@ -56,9 +56,9 @@ export class OwnerService {
       }));
   }
 
-  deleteOwner(id: number): Observable<Owner> {
+  deleteOwner(id: number): Observable<IOwner> {
     const url = `${this.ownersUrl}/${id}`;
-    return this.http.delete<Owner>(url, this.httpOptions)
+    return this.http.delete<IOwner>(url, this.httpOptions)
   };
 
   private handleError<T>(operation = 'operation', result?: T) {

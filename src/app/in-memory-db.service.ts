@@ -1,8 +1,10 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { IOwner } from './owner';
+
 
 export class inMemoryDb implements InMemoryDbService {
   createDb() {
-    const owners = [
+    const owners: IOwner[] = [
     {   
         id: 0,
         firstName: 'Алексей',
@@ -13,13 +15,15 @@ export class inMemoryDb implements InMemoryDbService {
                 number: 'АХ2929АХ',
                 name: 'Lamborgini',
                 model: 'Aventador SVJ',
-                year: 2015  
+                year: 2015,
+                id: 'lamba'
             },
             {
                 number: 'АХ2288АХ',
                 name: 'McLaren',
                 model: 'F1',
-                year: 2018
+                year: 2018,
+                id: 'mcLaren'
             } 
         ] 
     },

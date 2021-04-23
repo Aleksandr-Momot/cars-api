@@ -16,10 +16,12 @@ import { numberValidator } from '../car-number.validators';
 
 export class OwnerInfoComponent implements OnInit {
   owner: Owner;
+  ownerClone: Owner;
   form: FormGroup;
   submitted = false;
   carForm: FormGroup;
 
+  isAvalible = false;
   uSub: Subscription
   constructor(
     private route: ActivatedRoute,
@@ -29,25 +31,35 @@ export class OwnerInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getOwnerById()
+    this.getOwnerById();
+  }
+
+  carChanged(event) {
+    console.log(event);
+    let changedCarValue = event;
+    
+    if (this.ownerClone.cars.find(car => car.id === changedCarValue.id)) {
+      let carT = this.ownerClone.cars.find(car => car.id === changedCarValue.id);
+      carT.model = changedCarValue.carModel;
+      carT.name = changedCarValue.carName;
+      carT.number = changedCarValue.carNumber;
+      carT.year = changedCarValue.carYear
+    }
   }
 
   getOwnerById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ownerService.getOwnerById(id)
       .subscribe((owner: Owner) => {
-        this.owner = owner
-        for (let item of this.owner.cars) {
-          this.form = new FormGroup({
+        this.owner = owner;
+        let OStr = JSON.stringify(this.owner);
+        this.ownerClone = JSON.parse(OStr);
+        this.form = new FormGroup({
             firstName: new FormControl(this.owner.firstName, Validators.required),
             lastName: new FormControl(this.owner.lastName, Validators.required),
             middleName: new FormControl(this.owner.middleName, Validators.required),
-            carNumber: new FormControl(item.number, [Validators.required, numberValidator()]),
-            carName: new FormControl(item.name, Validators.required),
-            carModel: new FormControl(item.model, Validators.required),
-            carYear: new FormControl(item.year, Validators.required),
-          })
-        }
+        })
+       
       })
   }
 
@@ -55,26 +67,24 @@ export class OwnerInfoComponent implements OnInit {
     this.location.back();
   }
 
+  reload() {
+    let OStr = JSON.stringify(this.ownerClone);
+    this.owner = JSON.parse(OStr);
+    this.save();
+    this.goBack();
+  }
+
   save(): void {
     if (this.form.invalid) {
       return
     }
-    this.submitted = true
-    this.uSub = this.ownerService.updateOwner({
-      ...this.owner,
-      firstName: this.form.value.firstName,
-      lastName: this.form.value.lastName,
-      middleName: this.form.value.middleName,
-      cars: [
-        {
-          number: this.form.value.carNumber,
-          name: this.form.value.carName,
-          model: this.form.value.carModel,
-          year: this.form.value.carYear,
-        }
-      ]
-    }).subscribe(() => {
-      this.submitted = false
+    this.submitted = true;
+    
+    this.ownerClone.firstName = this.form.value.firstName;
+    this.ownerClone.lastName = this.form.value.lastName;
+    this.ownerClone.middleName = this.form.value.middleName;
+    this.uSub = this.ownerService.updateOwner(this.ownerClone).subscribe(() => {
+      this.submitted = false;
       this.router.navigate([''])
     })
   }
