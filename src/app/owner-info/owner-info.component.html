@@ -1,12 +1,11 @@
 <div class="container">
     <div class="owner-info" *ngIf="owner; else loading">
         <h2>{{owner.firstName}}</h2>
-        <form [formGroup]="form" (ngSubmit)="save()" >
+        <form [formGroup]="form" (ngSubmit)="save()">
             <mat-form-field appearance="outline" class="custom-input">
                 <mat-label for="first-name">Имя</mat-label>
                 <input matInput formControlName="firstName" id="first-name" placeholder="Owner name"
                     autocomplete="firstName">
-                    
                 <mat-error class="error" id="requiredEmailError"
                     *ngIf="form.controls['firstName'].hasError('required')">
                     Введите имя
@@ -29,20 +28,17 @@
                     Введите отчество
                 </mat-error>
             </mat-form-field>
-
             <h2>Автомобили</h2>
-
-        </form> 
+        </form>
         <ng-container *ngFor="let carItem of ownerClone.cars">
             <app-car-form [car]="carItem" (formChanged)="carChanged($event)"></app-car-form>
         </ng-container>
         <div class="owner-btn-group">
             <button mat-raised-button color="primary" (click)="goBack()">Назад</button>
             <button (click)="reload()" mat-raised-button type="submit" color="primary"
-            [disabled]="form.invalid || submitted">Обновить</button>
+                [disabled]="form.invalid || submitted">Обновить</button>
         </div>
     </div>
-
     <div class="loading-bar">
         <ng-template class="loader" #loading>
             <mat-spinner></mat-spinner>

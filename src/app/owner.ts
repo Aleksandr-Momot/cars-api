@@ -7,9 +7,9 @@ export interface IOwner {
 }
 
 export interface ICar {
-    number: string,
-    name: string,
-    model: string,
-    year: number,
-    id: string
+    number: string;
+    name: string;
+    model: string;
+    year: number;
+    id: string;
 }
