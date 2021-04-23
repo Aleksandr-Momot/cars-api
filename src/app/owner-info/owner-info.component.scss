@@ -1,0 +1,33 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cars-form {
+    flex-direction: row;
+}
+
+.owner-info {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.owner-btn-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    button {
+        width: 100%;
+    }
+}
+
+.auto-card {
+    padding: 20px;
+    border: 1px solid grey;
+    margin-bottom: 20px;
+}

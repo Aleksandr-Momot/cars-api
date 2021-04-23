@@ -1,0 +1,38 @@
+.main-table-container {
+    padding-top: 100px;
+}
+
+table { 
+    width: 100%;
+    position: relative;
+    box-shadow: none;
+    border: 1px solid grey;
+}
+
+
+
+.button-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+    button {
+        width: 100%;
+        max-width: 130px;
+    }
+}
+
+.add-new-owner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 0;
+    p {
+        font-size: 20px;
+        font-weight: 700
+        ;
+    }
+}

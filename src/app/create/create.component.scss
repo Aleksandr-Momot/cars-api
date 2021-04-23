@@ -1,0 +1,12 @@
+.name-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 15px;
+    h2 {
+        text-transform: capitalize;
+        font-size: 30px;
+    }
+}
